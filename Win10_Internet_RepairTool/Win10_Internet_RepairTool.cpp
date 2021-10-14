@@ -83,6 +83,14 @@ bool is_number(string str)
 	}
 }
 
+int ask_reboot() {
+	MessageBox(NULL, "设置已完成, 可能需要在重启后生效。", "提示: ", MB_OK | MB_ICONINFORMATION);
+	if (MessageBox(NULL, "是否要立即重启? 记得保存好工作!\n若重启失败, 请自行重启", "重启确认: ", MB_YESNO | MB_ICONQUESTION | MB_DEFBUTTON2) == IDYES) {
+		system("shutdown -r -t 0");
+	}
+	return 0;
+}
+
 int menu() {
 	int i = -1;
 	string str;
@@ -104,7 +112,7 @@ int menu() {
 
 int main()
 {
-	system("title Win10 \"无法连接 Internet\" 问题修复工具 ( v1.0.0 Built by Hui-Shao / 浅蓝的灯) & color cf & mode con cols=130 lines=32");
+	system("title Win10 \"无法连接 Internet\" 问题修复工具 ( v1.0.1 Built by Hui-Shao / 浅蓝的灯) & color cf & mode con cols=130 lines=32");
 
 	int choice = 0;
 
@@ -122,6 +130,7 @@ int main()
 			}
 			cout << "\n 选项" << choice << "已完成，按任意键继续..." << endl;
 			system("color 3f && pause>nul");
+			ask_reboot();
 			break;
 		case(2):
 			for (unsigned int i = 0; i < sizeof(subkeys) / sizeof(subkeys[0]); i++) {
@@ -129,14 +138,10 @@ int main()
 			}
 			cout << "\n 选项" << choice << "已完成，按任意键继续..." << endl;
 			system("color 3f && pause>nul");
+			ask_reboot();
 			break;
 		case(3):
 			exit(0);
-		}
-		MessageBox(NULL, "设置已完成, 可能需要在重启后生效。", "提示: ", MB_OK | MB_ICONINFORMATION);
-		if (MessageBox(NULL, "是否要立即重启? 记得保存好工作!\n若重启失败, 请自行重启", "重启确认: ", MB_YESNO | MB_ICONQUESTION | MB_DEFBUTTON2) == IDYES) {
-			system("shutdown -r -t 0");
-			break;
 		}
 	}
 	return 0;

@@ -1,4 +1,4 @@
 ﻿#pragma once
 #include <iostream>
-#include<cstringt.h>
-#include "Windows.h"
+#include <cstringt.h>
+#include <winreg.h>
